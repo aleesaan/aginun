@@ -12,19 +12,19 @@ const routes = [
     name: "roles",
     component: RolesOverview,
     alias: "/",
-    children: [{ path: "view/:id", component: RoleViewDialog }],
+    children: [{ path: "view/:id", component: RoleViewDialog }]
   },
   {
     // non-existent pages redirect to the home page
     path: "*",
-    redirect: "/",
-  },
+    redirect: "/"
+  }
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes,
+  routes
 });
 
 export default router;

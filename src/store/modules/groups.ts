@@ -5,11 +5,11 @@ export default {
   namespaced: true,
   state: {
     localGroups: [],
-    workingCircles: [],
+    workingCircles: []
   },
   getters: {
-    localGroupIds: state => state.localGroups.map(g => g.id),
-    workingCircleIds: state => state.workingCircles.map(g => g.id),
+    localGroupIds: (state) => state.localGroups.map((g) => g.id),
+    workingCircleIds: (state) => state.workingCircles.map((g) => g.id)
   },
   mutations: {
     setLocalGroups(state, localGroups) {
@@ -17,7 +17,7 @@ export default {
     },
     setWorkingCircles(state, workingCircles) {
       state.workingCircles = workingCircles;
-    },
+    }
   },
   actions: {
     async loadGroups({ commit }) {
@@ -33,10 +33,10 @@ export default {
               title
             }
           }
-        `,
+        `
       });
       commit("setLocalGroups", response.data.localGroups);
       commit("setWorkingCircles", response.data.workingCircles);
-    },
-  },
+    }
+  }
 };

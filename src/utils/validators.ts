@@ -1,10 +1,8 @@
 import has from "lodash/has";
 
-export const makeObjectValidator = (objectExpectedStructure: {
-  [x: string]: any;
-}) => {
-  const isObjectValid = (objectToValidate: { [x: string]: any; }) => {
-    return Object.keys(objectExpectedStructure).every(key => {
+export const makeObjectValidator = (objectExpectedStructure: { [x: string]: unknown }) => {
+  return (objectToValidate: { [x: string]: unknown }) => {
+    return Object.keys(objectExpectedStructure).every((key) => {
       if (!has(objectToValidate, key)) return false;
 
       const actualType = typeof objectToValidate[key];
@@ -12,13 +10,11 @@ export const makeObjectValidator = (objectExpectedStructure: {
       return actualType === expectedType;
     });
   };
-  return isObjectValid;
 };
 
-export const isArrayValid = (
-  arrayToValidate: any[],
-  isItemValid: (arg0: any) => any
-) => arrayToValidate.every((item: any) => isItemValid(item));
+export const isArrayValid = (arrayToValidate: unknown[], isItemValid: (arg) => unknown) => {
+  return arrayToValidate.every((item) => isItemValid(item));
+};
 
 export const iconValidator = (iconName: string) => {
   return iconName.startsWith("mdi-");
@@ -26,5 +22,5 @@ export const iconValidator = (iconName: string) => {
 
 export const hrefValidator = (href: string) => {
   const validHrefPrefixes = ["http://", "https://", "mailto:", "tel:"];
-  return validHrefPrefixes.some(hrefPrefix => href.startsWith(hrefPrefix));
+  return validHrefPrefixes.some((hrefPrefix) => href.startsWith(hrefPrefix));
 };
